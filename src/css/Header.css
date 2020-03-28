@@ -1,0 +1,33 @@
+.btn-addWorkspace {
+    background: rgb(9, 168, 9) !important;
+    margin: 15px 10px 5px !important;
+}
+
+.headerApp {
+    width: 100%;
+    height: 60px;
+    background: #2f69f0;
+    font-size: 18px;
+    font-weight: bold;
+    color: #fff;
+    display: flex;
+    justify-content: left;
+
+    /* manter header fixo */
+    position: fixed;
+    top:0;
+    left: 0;
+}
+
+.iconMenu {
+    color: white;
+}
+
+.titleHeader {
+    margin-left: 15px;
+    align-self: center;
+}
+
+.logoutOption {
+    color: red;
+}
