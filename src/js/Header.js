@@ -36,8 +36,8 @@ export default function TemporaryDrawer() {
                 [classes.fullList]: anchor === 'top' || anchor === 'bottom',
             })}
             role="presentation"
-            onClick={toggleDrawer(anchor, false)}
-            onKeyDown={toggleDrawer(anchor, false)}
+            onClick={toggleDrawer(anchor, true)} // true para manter o menu ativo ao clicar 
+            onKeyDown={toggleDrawer(anchor, true)}
         >
             <Button variant="contained" color="primary" className={classes.margin + " btn-addWorkspace"}>
                 Add Workspace
