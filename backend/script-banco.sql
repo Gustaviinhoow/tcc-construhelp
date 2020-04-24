@@ -1,0 +1,34 @@
+CREATE SCHEMA IF NOT EXISTS construhelp;
+
+USE construhelp;
+
+/*
+CREATE TABLE IF NOT EXISTS Users (
+	id INT PRIMARY KEY NOT NULL,
+    username VARCHAR(45) NOT NULL,
+    firstName VARCHAR(45) NOT NULL,
+    lastName VARCHAR(45) NOT NULL,
+    email VARCHAR(320) NOT NULL,
+    password VARCHAR(32) NOT NULL,
+    createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS Workspaces (
+	id INT PRIMARY KEY NOT NULL,
+    name VARCHAR(45) NOT NULL,
+    createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    userId INT,
+    CONSTRAINT FK_userWorkspace FOREIGN KEY (userId) REFERENCES Users(id)
+);
+
+CREATE TABLE IF NOT EXISTS Tasks (
+	id INT PRIMARY KEY NOT NULL,
+    description TEXT NOT NULL,
+    priority VARCHAR(16) DEFAULT '' NOT NULL,
+    completed TINYINT DEFAULT 0 NOT NULL,
+    deadline DATE,
+    createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    workspaceId INT,
+    CONSTRAINT FK_workspaceTask FOREIGN KEY (workspaceId) REFERENCES Workspaces(id)
+);
+*/
