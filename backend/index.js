@@ -18,9 +18,15 @@ database.sequelize.sync({ force: true }).then(() => {
     console.log("Drop and re-sync db.");
 });
 
+
+// Routes
 app.get("/", (req, res) => {
-    res.send("Olá Mundo");
+    res.send("Olá Mundo!");
 });
+
+require("./src/routes/userRoute")(app);
+require("./src/routes/workspaceRoute")(app);
+require("./src/routes/taskRoute")(app);
 
 app.listen(port, () => {
     console.log(`Backend is running on port ${port}`);
