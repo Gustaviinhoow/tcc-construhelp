@@ -7,7 +7,7 @@ exports.create = (req, res) => {
 
     return Workspace.create({
         name: name,
-        userId: userId
+        UserId: userId
     }).then(data => {
         res.send(data);
     }).catch(error => {

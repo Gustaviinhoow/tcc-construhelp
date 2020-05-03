@@ -7,10 +7,10 @@ exports.create = (req, res) => {
 
     return Task.create({
         description: description,
-        priority: description,
+        priority: priority,
         completed: completed ? completed : false,
         deadline: deadline,
-        workspaceId: workspaceId
+        WorkspaceId: workspaceId
     }).then(data => {
         res.send(data);
     }).catch(error => {
