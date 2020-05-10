@@ -1,12 +1,12 @@
 import React from 'react';
-import Header from './Header';
+import Cadastro from './tela_cadastro';
 
 import '../css/App.css';
 
 function App() {
   return (
     <div className="App">
-      <Header />
+      <Cadastro />
     </div>
   );
 }

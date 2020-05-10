@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './style.css';
+import '../css/style_telacadastro.css';
 import api from '../services/api';
 
 function App() {
