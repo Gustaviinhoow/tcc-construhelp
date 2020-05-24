@@ -1,12 +1,12 @@
 import React from 'react';
-import Cadastro from './tela_cadastro';
+import Login from './SignIn';
 
-import '../css/App.css';
+import '../js/SignIn';
 
 function App() {
   return (
     <div className="App">
-      <Cadastro />
+      <Login />
     </div>
   );
 }
