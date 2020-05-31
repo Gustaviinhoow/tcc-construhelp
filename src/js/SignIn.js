@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -13,7 +14,6 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import '../js/SingUp';
-
 
 function Copyright() {
   return (
@@ -58,6 +58,27 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function SignInSide() {
+  const [data, setData] = useState(null);
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const res = await axios('http://localhost:8080/api/users');
+
+      console.log(res.data);
+      setData(res.data);
+    }
+
+    fetchData();
+  }, []);
+
+  /* componentDidMount() {
+    axios.get('').then(res => {
+      console.log(res);
+      this.setState({users: res.data});
+    });
+  }; */
+  
   const classes = useStyles();
 
   return (
@@ -128,5 +149,4 @@ export default function SignInSide() {
       </Grid>
     </Grid>
   );
-  
 }

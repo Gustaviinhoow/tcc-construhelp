@@ -6,18 +6,22 @@ const database = require('./src/models/database');
 const app = express();
 
 const port = process.env.port || 8080;
-var corsOptions = {
-    origin: "http://localhost:8081"
-};
 
-app.use(cors(corsOptions));
+var allowCrossDomain = function (req, res, next) {
+    res.header('Access-Control-Allow-Origin', 'http://localhost:3000');
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+    res.header('Access-Control-Allow-Headers', 'Content-Type');
+
+    next();
+}
+
+app.use(allowCrossDomain);
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 database.sequelize.sync({ force: true }).then(() => {
     console.log("Drop and re-sync db.");
 });
-
 
 // Routes
 app.get("/", (req, res) => {
