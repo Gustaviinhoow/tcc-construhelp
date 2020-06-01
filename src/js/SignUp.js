@@ -1,4 +1,5 @@
 import React from 'react';
+import { browserHistory, Link as LinkRouter } from 'react-router';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -123,9 +124,9 @@ export default function SignUp() {
           </Button>
           <Grid container justify="flex-end">
             <Grid item>
-              <Link href="#" variant="body2">
+              <LinkRouter to="/" variant="body2">
                 Already have an account? Sign in
-              </Link>
+              </LinkRouter>
             </Grid>
           </Grid>
         </form>

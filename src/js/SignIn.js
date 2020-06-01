@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { browserHistory, Link as LinkRouter } from 'react-router';
 import axios from 'axios';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
@@ -13,7 +14,7 @@ import Grid from '@material-ui/core/Grid';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
-import '../js/SingUp';
+import './SignUp';
 
 function Copyright() {
   return (
@@ -69,16 +70,9 @@ export default function SignInSide() {
       setData(res.data);
     }
 
-    fetchData();
+    // fetchData();
   }, []);
 
-  /* componentDidMount() {
-    axios.get('').then(res => {
-      console.log(res);
-      this.setState({users: res.data});
-    });
-  }; */
-  
   const classes = useStyles();
 
   return (
@@ -136,9 +130,9 @@ export default function SignInSide() {
                 </Link>
               </Grid>
               <Grid item>
-                <Link href="#" variant="body2" >
+                <LinkRouter to={"/signup"} variant="body2" >
                   {"Don't have an account? Sign Up"}
-                </Link>
+                </LinkRouter>
               </Grid>
             </Grid>
             <Box mt={5}>
