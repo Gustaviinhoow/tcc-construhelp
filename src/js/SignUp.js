@@ -15,6 +15,12 @@ import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import api from "../services/api";
 
+import {
+  NotificationContainer,
+  NotificationManager,
+} from "react-notifications";
+import "react-notifications/lib/notifications.css";
+
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
@@ -51,7 +57,6 @@ export default function SignUp(props) {
   const [User, setUser] = useState({
     firstName: "",
     lastName: "",
-    username: "",
     email: "",
     password: "",
   });
@@ -69,22 +74,28 @@ export default function SignUp(props) {
     api
       .post("users/", User)
       .then((res) => {
-        browserHistory.push("/");
+        NotificationManager.success(
+          "Usuário cadastrado com sucesso.",
+          "",
+          1000,
+          () => {}
+        );
+        setTimeout(() => {
+          browserHistory.push("/");
+        }, 1000);
       })
       .catch((error) => {
-        console.error(error);
-        alert("Não foi possível");
+        NotificationManager.error(
+          "Alguns dados inseridos são inválidos.",
+          "",
+          2000,
+          () => {}
+        );
       });
   }
 
-  useEffect(() => {
-    /* async function fetchData() {
-      const res = await api.get("/users/").then((res) => {
-        console.log(res.data);
-      });
-    }
-    fetchData(); */
-  }, []);
+  /* useEffect(() => {
+  }, []); */
 
   return (
     <Container component="main" maxWidth="xs">
@@ -94,13 +105,14 @@ export default function SignUp(props) {
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
-          Cadastrar
+          Cadastro
         </Typography>
+        <errorAlert hasError={false} />
         <form className={classes.form} onSubmit={handleSubmit}>
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
               <TextField
-                autoComplete="fname"
+                autoComplete="off"
                 name="firstName"
                 variant="outlined"
                 required
@@ -119,19 +131,7 @@ export default function SignUp(props) {
                 id="lastName"
                 label="Sobrenome"
                 name="lastName"
-                autoComplete="lname"
-                onChange={handleChange.bind(this)}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                id="username"
-                label="Nome de usuário"
-                name="username"
-                autoComplete="username"
+                autoComplete="off"
                 onChange={handleChange.bind(this)}
               />
             </Grid>
@@ -143,7 +143,7 @@ export default function SignUp(props) {
                 id="email"
                 label="Endereço de email"
                 name="email"
-                autoComplete="email"
+                autoComplete="off"
                 onChange={handleChange.bind(this)}
               />
             </Grid>
@@ -156,7 +156,7 @@ export default function SignUp(props) {
                 label="Senha"
                 type="password"
                 id="password"
-                autoComplete="current-password"
+                autoComplete="off"
                 onChange={handleChange.bind(this)}
               />
             </Grid>
@@ -168,12 +168,12 @@ export default function SignUp(props) {
             color="primary"
             className={classes.submit}
           >
-            Sign Up
+            Cadastrar
           </Button>
           <Grid container justify="flex-end">
             <Grid item>
               <LinkRouter to="/" variant="body2">
-                Already have an account? Sign in
+                Já tem uma conta? Faça login
               </LinkRouter>
             </Grid>
           </Grid>
@@ -182,6 +182,7 @@ export default function SignUp(props) {
       <Box mt={5}>
         <Copyright />
       </Box>
+      <NotificationContainer />
     </Container>
   );
 }

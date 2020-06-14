@@ -59,8 +59,10 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function SignInSide() {
-  const [data, setData] = useState(null);
-  const [user, setUser] = useState(null);
+  const [User, setUser] = useState({
+    email: "",
+    password: "",
+  });
 
   /*
   useEffect(() => {
@@ -76,6 +78,19 @@ export default function SignInSide() {
 
   const classes = useStyles();
 
+  function handleChange(event) {
+    setUser({
+      ...User,
+      [event.target.name]: event.target.value,
+    });
+  }
+
+  function handleSubmit(event) {
+    event.preventDefault();
+
+    /* api.get("",  ) */
+  }
+
   return (
     <Grid container component="main" className={classes.root}>
       <CssBaseline />
@@ -88,17 +103,18 @@ export default function SignInSide() {
           <Typography component="h1" variant="h5">
             Login
           </Typography>
-          <form className={classes.form} noValidate>
+          <form className={classes.form} onSubmit={handleSubmit}>
             <TextField
               variant="outlined"
               margin="normal"
               required
               fullWidth
               id="login"
-              label="Nome de usuário ou email"
-              name="username"
-              autoComplete="username"
+              label="Endereço de email"
+              name="email"
+              autoComplete="email"
               autoFocus
+              onChange={handleChange.bind(this)}
             />
             <TextField
               variant="outlined"
@@ -110,6 +126,7 @@ export default function SignInSide() {
               type="password"
               id="password"
               autoComplete="current-password"
+              onChange={handleChange.bind(this)}
             />
             <Button
               type="submit"
@@ -118,14 +135,14 @@ export default function SignInSide() {
               color="primary"
               className={classes.submit}
             >
-              Logar
+              Entrar
             </Button>
             <Grid container>
-              <Grid item xs>
+              {/* <Grid item xs>
                 <Link href="#" variant="body2">
                   Esqueceu a senha?
                 </Link>
-              </Grid>
+              </Grid> */}
               <Grid item>
                 <LinkRouter to={"/signup"} variant="body2">
                   {"Não tem uma conta? Cadastre-se"}

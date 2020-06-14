@@ -1,13 +1,13 @@
-module.exports = app => {
-    const task = require("../controllers/taskController");
+module.exports = (app) => {
+  const task = require("../controllers/taskController");
 
-    var router = require("express").Router();
+  var router = require("express").Router();
 
-    router.post("/", task.create);
-    router.put("/:id", task.update);
-    router.delete("/:id", task.delete);
-    router.get("/", task.findAll);
-    router.get("/:id", task.findById);
+  router.post("/", task.create);
+  router.put("/:id", task.update);
+  router.delete("/:id", task.delete);
+  router.get("/", task.findAll);
+  router.get("/:id", task.findById);
 
-    app.use("/api/tasks", router);
+  app.use("/api/tasks", router);
 };
