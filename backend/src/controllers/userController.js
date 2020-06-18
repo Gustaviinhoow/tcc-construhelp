@@ -135,3 +135,17 @@ exports.findById = (req, res) => {
       });
     });
 };
+
+exports.login = (req, res) => {
+  const { email, password } = req.body;
+
+  return User.findOne({ where: { email: email, password: password } })
+    .then((data) => {
+      res.send(data);
+    })
+    .catch((error) => {
+      res.status(500).send({
+        message: "Error while searching user",
+      });
+    });
+};

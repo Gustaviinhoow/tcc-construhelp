@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { browserHistory, Link as LinkRouter } from "react-router";
+import { browserHistory, Link as LinkRouter, Redirect } from "react-router";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -14,6 +14,13 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import "./SignUp";
+import api from "../services/api";
+
+import {
+  NotificationContainer,
+  NotificationManager,
+} from "react-notifications";
+import "react-notifications/lib/notifications.css";
 
 function Copyright() {
   return (
@@ -88,7 +95,43 @@ export default function SignInSide() {
   function handleSubmit(event) {
     event.preventDefault();
 
-    /* api.get("",  ) */
+    api
+      .post("users/login/", User)
+      .then((res) => {
+        const { id } = res.data;
+
+        if (id == "" || id == undefined) {
+          NotificationManager.error(
+            "Verifique se as credenciais estão corretas.",
+            "Falha no Login",
+            2000,
+            () => {}
+          );
+        } else {
+          NotificationManager.success(
+            "",
+            "Login efetuado com sucesso",
+            2000,
+            () => {}
+          );
+          setTimeout(() => {
+            // ação dps do login
+            browserHistory.push({
+              pathname: "/dashboard",
+              state: { id: id },
+            });
+          }, 2000);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        NotificationManager.error(
+          "Ocorreu um erro interno.",
+          "Falha no Login",
+          2000,
+          () => {}
+        );
+      });
   }
 
   return (
@@ -155,6 +198,7 @@ export default function SignInSide() {
           </form>
         </div>
       </Grid>
+      <NotificationContainer />
     </Grid>
   );
 }

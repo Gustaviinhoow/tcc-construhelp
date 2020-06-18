@@ -11,5 +11,7 @@ module.exports = (app) => {
   router.get("/", user.findAll);
   router.get("/:id", user.findById);
 
+  router.post("/login", user.login);
+
   app.use("/api/users", router);
 };
