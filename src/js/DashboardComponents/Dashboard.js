@@ -1,16 +1,18 @@
 import React from "react";
 import Header from "./Header";
-import Page from "./Page";
+import Workspaces from "./WorkspacesList";
 
-import "../css/Dashboard.css";
+import "../../css/Dashboard.css";
 
 export default function Dashboard(props) {
   const { id } = props;
 
+  // Criar rotas
+
   return (
     <div>
-      {/* <Header /> */}
-      <Page id={id} />
+      <Header />
+      <Workspaces id={id} />
     </div>
   );
 }

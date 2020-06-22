@@ -100,7 +100,7 @@ export default function SignInSide() {
       .then((res) => {
         const { id } = res.data;
 
-        if (id == "" || id == undefined) {
+        if (id === "" || id === undefined) {
           NotificationManager.error(
             "Verifique se as credenciais estão corretas.",
             "Falha no Login",

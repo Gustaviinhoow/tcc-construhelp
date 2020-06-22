@@ -3,8 +3,11 @@ import { Router, Route, browserHistory } from "react-router";
 
 import SignIn from "./SignIn";
 import SignUp from "./SignUp";
-import Dashboard from "./Dashboard";
+import Dashboard from "./DashboardComponents/Dashboard";
 import PrivateRoute from "./PrivateRoute";
+
+// Bootstrap
+import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
   return (
