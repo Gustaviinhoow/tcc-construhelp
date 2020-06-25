@@ -3,13 +3,11 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 import SignIn from "./SignIn";
 import SignUp from "./SignUp";
-import Dashboard from "./DashboardComponents/Dashboard";
-import PrivateRoute from "./PrivateRoute";
 
-/* import WorkspacesList from "./DashboardComponents/WorkspacesList";
-import Workspace from "./DashboardComponents/Workspace";
-import Schedule from "./DashboardComponents/Schedule";
-import Settings from "./DashboardComponents/Settings"; */
+import WorkspacesList from "./Home/WorkspacesList";
+import Workspace from "./Home/Workspace";
+import Schedule from "./Home/Schedule";
+import Settings from "./Home/Settings";
 
 // Bootstrap
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -34,15 +32,32 @@ class App extends Component {
                     </div>
                   );
                 } else {
-                  return (
-                    <Dashboard
-                      id={props.location.state.id}
-                      match={props.match.url}
-                    />
-                  );
+                  return <WorkspacesList id={props.location.state.id} />;
                 }
               }}
               exact
+            />
+            <Route
+              path={`/dashboard/workspaces`}
+              exact
+              component={(props) => (
+                <WorkspacesList id={props.location.state.id} />
+              )}
+            />
+            <Route
+              path={`/dashboard/workspaces/:id`}
+              exact
+              component={(props) => <Workspace id={props.location.state.id} />}
+            />
+            <Route
+              path={`/dashboard/schedule`}
+              exact
+              component={(props) => <Schedule id={props.location.state.id} />}
+            />
+            <Route
+              path={`/dashboard/settings`}
+              exact
+              component={(props) => <Settings id={props.location.state.id} />}
             />
           </Switch>
         </BrowserRouter>

@@ -5,3 +5,12 @@
 hr {
   background: white;
 }
+
+.linkHeader {
+  color: rgb(160, 160, 160);
+}
+
+.linkHeader:hover {
+  color: white;
+  text-decoration: none;
+}
