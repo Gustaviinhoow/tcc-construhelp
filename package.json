@@ -15,10 +15,10 @@
     "react-bootstrap-icons": "^1.0.3-alpha4",
     "react-dom": "^16.13.1",
     "react-notifications": "^1.6.0",
-    "react-router": "^3.2.6",
+    "react-router": "^5.2.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.1",
-    "reactstrap": "^8.4.1"
+    "reactstrap": "^8.5.0"
   },
   "scripts": {
     "start": "react-scripts start",

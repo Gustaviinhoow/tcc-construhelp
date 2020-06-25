@@ -6,17 +6,18 @@ import "../../css/Header.css";
 
 export default function Header(props) {
   return (
-    <div class="spacing">
+    <div className="spacing">
       <Navbar fixed="top" collapseOnSelect expand="lg" bg="dark" variant="dark">
         <Navbar.Brand>Dashboard</Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="mr-auto">
-            <Nav.Link href="#">Workspaces</Nav.Link>
-            <Nav.Link href="#">Cronograma</Nav.Link>
+            <Nav.Link href="/dashboard/workspaces"> Workspaces</Nav.Link>
+            <Nav.Link href="/dashboard/schedule">Cronograma</Nav.Link>
           </Nav>
+          <hr />
           <Nav>
-            <Nav.Link href="#">
+            <Nav.Link href="/dashboard/settings">
               <GearFill color="white" size={20} /> Configurações
             </Nav.Link>
             <Nav.Link href="#">

@@ -1,12 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { browserHistory, Link as LinkRouter, Redirect } from "react-router";
+import { Link, useHistory } from "react-router-dom";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Checkbox from "@material-ui/core/Checkbox";
-import Link from "@material-ui/core/Link";
 import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
@@ -81,7 +78,7 @@ export default function SignUp(props) {
           () => {}
         );
         setTimeout(() => {
-          browserHistory.push("/");
+          history.push("/");
         }, 1000);
       })
       .catch((error) => {
@@ -96,6 +93,8 @@ export default function SignUp(props) {
 
   /* useEffect(() => {
   }, []); */
+
+  const history = useHistory();
 
   return (
     <Container component="main" maxWidth="xs">
@@ -172,9 +171,9 @@ export default function SignUp(props) {
           </Button>
           <Grid container justify="flex-end">
             <Grid item>
-              <LinkRouter to="/" variant="body2">
+              <Link to="/" variant="body2">
                 Já tem uma conta? Faça login
-              </LinkRouter>
+              </Link>
             </Grid>
           </Grid>
         </form>

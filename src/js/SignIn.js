@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { browserHistory, Link as LinkRouter, Redirect } from "react-router";
+import { Link, useHistory } from "react-router-dom";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
-import Link from "@material-ui/core/Link";
+// import { Link as LinkUI } from "@material-ui/core/Link";
 import Paper from "@material-ui/core/Paper";
 import Box from "@material-ui/core/Box";
 import Grid from "@material-ui/core/Grid";
@@ -71,17 +71,7 @@ export default function SignInSide() {
     password: "",
   });
 
-  /*
-  useEffect(() => {
-    const fetchData = async () => {
-      const res = await axios('http://localhost:8080/api/users');
-
-      console.log(res.data);
-      setData(res.data);
-    }
-    fetchData();
-  }, []);
-  */
+  const history = useHistory();
 
   const classes = useStyles();
 
@@ -116,7 +106,7 @@ export default function SignInSide() {
           );
           setTimeout(() => {
             // ação dps do login
-            browserHistory.push({
+            history.push({
               pathname: "/dashboard",
               state: { id: id },
             });
@@ -187,9 +177,7 @@ export default function SignInSide() {
                 </Link>
               </Grid> */}
               <Grid item>
-                <LinkRouter to={"/signup"} variant="body2">
-                  {"Não tem uma conta? Cadastre-se"}
-                </LinkRouter>
+                <Link to={"/signup"}>Não tem uma conta? Cadastre-se</Link>
               </Grid>
             </Grid>
             <Box mt={5}>

@@ -1,3 +1,7 @@
 .spacing {
   padding-top: 75px;
 }
+
+hr {
+  background: white;
+}
