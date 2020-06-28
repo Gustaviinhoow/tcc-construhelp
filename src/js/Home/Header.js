@@ -16,11 +16,11 @@ export default function Header(props) {
       message: "Tem certeza que quer sair?",
       buttons: [
         {
-          label: "Yes",
+          label: "Sim",
           onClick: () => history.push("/"),
         },
         {
-          label: "No",
+          label: "Não",
         },
       ],
     });

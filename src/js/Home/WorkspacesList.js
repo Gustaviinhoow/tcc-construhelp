@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Container, Form, Button, Card, ListGroup } from "react-bootstrap";
+import { TrashFill, ArrowRightSquareFill } from "react-bootstrap-icons";
 
 import Header from "./Header";
 import api from "../../services/api";
@@ -8,6 +9,10 @@ import {
   NotificationManager,
 } from "react-notifications";
 import "react-notifications/lib/notifications.css";
+import { confirmAlert } from "react-confirm-alert";
+import { Link } from "react-router-dom";
+
+import "../../css/WorkspacesList.css";
 
 export default class WorkspacesList extends Component {
   constructor(props) {
@@ -28,7 +33,6 @@ export default class WorkspacesList extends Component {
     this.handleChange = this.handleChange.bind(this);
 
     this.getWorkspaces = this.getWorkspaces.bind(this);
-    this.listWorkspaces = this.listWorkspaces.bind(this);
   }
 
   componentDidMount() {
@@ -50,38 +54,10 @@ export default class WorkspacesList extends Component {
         const workspaces = res.data;
 
         this.setState({ workspaceData: workspaces });
-        console.log(this.state.workspaceData);
       })
       .catch((err) => {
         console.log(err);
       });
-  }
-
-  listWorkspaces() {
-    this.getWorkspaces();
-
-    if (
-      this.state.workspaceData === undefined ||
-      this.state.workspaceData === []
-    ) {
-      return <p>Nenhum workspace encontrado.</p>;
-    } else {
-      const workspaces = this.state.workspaceData.map((item) => (
-        <ListGroup.Item>{item.name}</ListGroup.Item>
-      ));
-
-      console.log(workspaces);
-      return <div>{workspaces}</div>;
-    }
-
-    /* return this.state.workspaceData === undefined ||
-      this.state.workspaceData === [] ? (
-      <p>Nenhum workspace encontrado.</p>
-    ) : (
-      this.state.workspaceData.map(function (item) {
-        <ListGroup.Item>{item.name}</ListGroup.Item>;
-      })
-    ); */
   }
 
   renderFormWorkspaces() {
@@ -151,6 +127,46 @@ export default class WorkspacesList extends Component {
       });
   }
 
+  deleteWorkspace(workspaceName, id) {
+    confirmAlert({
+      title: "Confirmar",
+      message: `Tem certeza que deseja deletar "${workspaceName}"?`,
+      buttons: [
+        {
+          label: "Sim",
+          onClick: () => {
+            api
+              .delete(`/workspaces/${id}`)
+              .then((res) => {
+                NotificationManager.success(
+                  "",
+                  `Sucesso ao deletar "${workspaceName}"`,
+                  2000,
+                  () => {}
+                );
+
+                setTimeout(() => {
+                  window.location.reload(true);
+                }, 2000);
+              })
+              .catch((err) => {
+                NotificationManager.error(
+                  "",
+                  "Algo deu errado.",
+                  2000,
+                  () => {}
+                );
+                console.log(err);
+              });
+          },
+        },
+        {
+          label: "Não",
+        },
+      ],
+    });
+  }
+
   render() {
     return (
       <Container className="">
@@ -186,11 +202,43 @@ export default class WorkspacesList extends Component {
           <Card.Body>
             <ListGroup variant="flush">
               {this.state.workspaceData === undefined ||
-              this.state.workspaceData === [] ? (
+              this.state.workspaceData.length === 0 ? (
                 <p>Nenhum workspace encontrado.</p>
               ) : (
                 this.state.workspaceData.map((item) => (
-                  <ListGroup.Item key={item.id}>{item.name}</ListGroup.Item>
+                  <ListGroup.Item
+                    key={item.id}
+                    className="listItem d-flex mt-1"
+                  >
+                    <div className="p-2">{item.name}</div>
+                    <div className="ml-auto p-2">
+                      <TrashFill
+                        color="red"
+                        size={25}
+                        className="spacing-right"
+                        onClick={this.deleteWorkspace.bind(
+                          this,
+                          item.name,
+                          item.id
+                        )}
+                      />
+                      <Link
+                        to={{
+                          pathname: "/dashboard/workspace",
+                          state: {
+                            userId: this.state.Workspace.userId,
+                            workspaceId: item.id,
+                          },
+                        }}
+                      >
+                        <ArrowRightSquareFill
+                          color="black"
+                          size={30}
+                          className="mr-sm-2"
+                        />
+                      </Link>
+                    </div>
+                  </ListGroup.Item>
                 ))
               )}
             </ListGroup>

@@ -43,11 +43,18 @@ class App extends Component {
                 <WorkspacesList id={props.location.state.id} />
               )}
             />
+
             <Route
-              path={`/dashboard/workspaces/:id`}
+              path={`/dashboard/workspace/`}
               exact
-              component={(props) => <Workspace id={props.location.state.id} />}
+              component={(props) => (
+                <Workspace
+                  userId={props.location.state.userId}
+                  workspaceId={props.location.state.workspaceId}
+                />
+              )}
             />
+
             <Route
               path={`/dashboard/schedule`}
               exact
