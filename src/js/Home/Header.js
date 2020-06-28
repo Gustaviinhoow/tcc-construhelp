@@ -1,11 +1,31 @@
 import React from "react";
-import { Navbar, Nav } from "react-bootstrap";
-import { GearFill, BoxArrowRight } from "react-bootstrap-icons";
-import { Link } from "react-router-dom";
+import { Navbar, Nav, Button } from "react-bootstrap";
+import { GearFill } from "react-bootstrap-icons";
+import { Link, useHistory } from "react-router-dom";
+import { confirmAlert } from "react-confirm-alert";
+import "react-confirm-alert/src/react-confirm-alert.css"; // Import css
 
 import "../../css/Header.css";
 
 export default function Header(props) {
+  const history = useHistory();
+
+  function Logout() {
+    confirmAlert({
+      title: "Confirmar",
+      message: "Tem certeza que quer sair?",
+      buttons: [
+        {
+          label: "Yes",
+          onClick: () => history.push("/"),
+        },
+        {
+          label: "No",
+        },
+      ],
+    });
+  }
+
   return (
     <div className="spacing">
       <Navbar fixed="top" collapseOnSelect expand="lg" bg="dark" variant="dark">
@@ -46,11 +66,14 @@ export default function Header(props) {
                   state: { id: props.id },
                 }}
               >
-                <GearFill color="white" size={20} /> Configurações
+                <GearFill color="white" size={20} className="mr-sm-2" />
+                Configurações
               </Link>
             </Nav.Link>
             <Nav.Link href="#">
-              <BoxArrowRight color="red" size={20} /> Logout
+              <Button variant="danger" size="sm" onClick={Logout}>
+                Logout
+              </Button>
             </Nav.Link>
           </Nav>
         </Navbar.Collapse>

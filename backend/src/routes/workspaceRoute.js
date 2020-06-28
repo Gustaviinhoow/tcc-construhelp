@@ -9,5 +9,7 @@ module.exports = (app) => {
   router.get("/", workspace.findAll);
   router.get("/:id", workspace.findById);
 
+  router.post("/list", workspace.list);
+
   app.use("/api/workspaces", router);
 };

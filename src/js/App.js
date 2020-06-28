@@ -1,4 +1,4 @@
-import React, { Component, useState } from "react";
+import React, { Component } from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 import SignIn from "./SignIn";
@@ -35,7 +35,6 @@ class App extends Component {
                   return <WorkspacesList id={props.location.state.id} />;
                 }
               }}
-              exact
             />
             <Route
               path={`/dashboard/workspaces`}
