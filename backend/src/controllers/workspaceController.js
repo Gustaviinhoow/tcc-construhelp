@@ -127,22 +127,22 @@ exports.findById = (req, res) => {
 };
 
 exports.list = (req, res) => {
-  const { UserId } = req.body;
+  const { userId } = req.body;
 
-  if (!UserId) {
+  if (userId === undefined || userId === null) {
     res.status(400).send({
-      message: "Content can not be empty!",
+      message: `Content can not be empty! id: ${userId}`,
     });
     return;
   }
 
-  return Workspace.findAll({ where: { UserId: UserId } })
+  return Workspace.findAll({ where: { userId: userId } })
     .then((data) => {
       res.send(data);
     })
     .catch((error) => {
       res.status(500).send({
-        message: "Error while searching data",
+        message: `Error while searching data, id: ${userId}`,
       });
     });
 };

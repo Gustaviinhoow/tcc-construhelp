@@ -1,12 +1,5 @@
 import React, { Component } from "react";
-import {
-  Container,
-  Form,
-  FormControl,
-  Button,
-  Card,
-  ListGroup,
-} from "react-bootstrap";
+import { Container, Form, Button, Card, ListGroup } from "react-bootstrap";
 
 import Header from "./Header";
 import api from "../../services/api";
@@ -17,27 +10,78 @@ import {
 import "react-notifications/lib/notifications.css";
 
 export default class WorkspacesList extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       showCreateWorkspace: false,
       Workspace: {
         name: "",
-        UserId: undefined,
+        userId: this.props.id,
       },
-      workspaceData: undefined,
+      workspaceData: [],
+      listWorkspaces: false,
     };
 
     this.showContent = this.showContent.bind(this);
     this.renderFormWorkspaces = this.renderFormWorkspaces.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
+
+    this.getWorkspaces = this.getWorkspaces.bind(this);
+    this.listWorkspaces = this.listWorkspaces.bind(this);
+  }
+
+  componentDidMount() {
+    this.getWorkspaces();
   }
 
   showContent() {
     this.setState({
       showCreateWorkspace: !this.state.showCreateWorkspace,
     });
+  }
+
+  getWorkspaces() {
+    const User = { userId: this.state.Workspace.userId };
+
+    api
+      .post(`/workspaces/list`, User)
+      .then((res) => {
+        const workspaces = res.data;
+
+        this.setState({ workspaceData: workspaces });
+        console.log(this.state.workspaceData);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
+  listWorkspaces() {
+    this.getWorkspaces();
+
+    if (
+      this.state.workspaceData === undefined ||
+      this.state.workspaceData === []
+    ) {
+      return <p>Nenhum workspace encontrado.</p>;
+    } else {
+      const workspaces = this.state.workspaceData.map((item) => (
+        <ListGroup.Item>{item.name}</ListGroup.Item>
+      ));
+
+      console.log(workspaces);
+      return <div>{workspaces}</div>;
+    }
+
+    /* return this.state.workspaceData === undefined ||
+      this.state.workspaceData === [] ? (
+      <p>Nenhum workspace encontrado.</p>
+    ) : (
+      this.state.workspaceData.map(function (item) {
+        <ListGroup.Item>{item.name}</ListGroup.Item>;
+      })
+    ); */
   }
 
   renderFormWorkspaces() {
@@ -78,10 +122,15 @@ export default class WorkspacesList extends Component {
       .then((res) => {
         if (res.status === 200) {
           NotificationManager.success("", "Criado com sucesso", 2000, () => {});
-          // ação dps do cadastro
           this.setState({
             showCreateWorkspace: false,
+            listWorkspaces: true,
           });
+
+          //refresh page
+          setTimeout(() => {
+            window.location.reload(true);
+          }, 2000);
         } else {
           NotificationManager.error(
             "Verifique se os dados são válidos.",
@@ -111,7 +160,7 @@ export default class WorkspacesList extends Component {
           <Card.Header>
             <div className="d-flex mt-1">
               <Card.Title className="p-2">Workspaces</Card.Title>
-              <div className="p-2">
+              <div className="ml-auto p-2">
                 {this.state.showCreateWorkspace ? (
                   <Button
                     variant="danger"
@@ -132,16 +181,18 @@ export default class WorkspacesList extends Component {
                   </Button>
                 )}
               </div>
-              <Form inline className="ml-auto p-2">
-                <FormControl type="text" placeholder="Pesquisar" />
-              </Form>
             </div>
           </Card.Header>
           <Card.Body>
             <ListGroup variant="flush">
-              <ListGroup.Item>Workspace 1</ListGroup.Item>
-              <ListGroup.Item>Workspace 2</ListGroup.Item>
-              <ListGroup.Item>Workspace 3</ListGroup.Item>
+              {this.state.workspaceData === undefined ||
+              this.state.workspaceData === [] ? (
+                <p>Nenhum workspace encontrado.</p>
+              ) : (
+                this.state.workspaceData.map((item) => (
+                  <ListGroup.Item key={item.id}>{item.name}</ListGroup.Item>
+                ))
+              )}
             </ListGroup>
           </Card.Body>
         </Card>

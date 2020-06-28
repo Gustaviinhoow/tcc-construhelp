@@ -5,7 +5,6 @@ module.exports = (sequelize, Sequelize) => {
       name: {
         type: Sequelize.STRING(45),
         allowNull: false,
-        unique: true,
       },
     },
     {
