@@ -7,11 +7,13 @@ module.exports = (app) => {
 
   router.post("/", validation, user.create);
   router.put("/:id", user.update);
+
   router.delete("/:id", user.delete);
   router.get("/", user.findAll);
   router.get("/:id", user.findById);
 
   router.post("/login", user.login);
+  router.post("/changepassword", user.changepassword);
 
   app.use("/api/users", router);
 };

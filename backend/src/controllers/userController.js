@@ -149,3 +149,56 @@ exports.login = (req, res) => {
       });
     });
 };
+
+exports.changepassword = (req, res) => {
+  const id = req.body.id;
+  const password = req.body.password;
+  const currentPassword = req.body.currentPassword;
+
+  if (!id || !password) {
+    res.status(400).send({
+      message: "Content can not be empty!",
+    });
+    return;
+  }
+
+  User.findOne({
+    where: { id: id },
+  })
+    .then((data) => {
+      if (currentPassword !== data.password) {
+        res.status(400).send({
+          message: "Senha incorreta",
+        });
+        return;
+      }
+    })
+    .catch((err) => {
+      res.status(500).send({
+        message: "Erro ao tentar encontrar usuário.",
+      });
+    });
+
+  User.update(
+    { password: password },
+    {
+      where: { id: id },
+    }
+  )
+    .then((num) => {
+      if (num == 1) {
+        res.send({
+          message: "User was updated successfully.",
+        });
+      } else {
+        res.send({
+          message: `Cannot update user with id=${id}`,
+        });
+      }
+    })
+    .catch((error) => {
+      res.status(500).send({
+        message: "Error updating user with id=" + id,
+      });
+    });
+};
