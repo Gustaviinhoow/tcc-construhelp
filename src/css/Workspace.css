@@ -1,0 +1,25 @@
+.listItem {
+  font-size: 1.2em;
+}
+
+.spacing-right {
+  margin-right: 1em;
+}
+
+.spacing-top {
+  margin-top: 1em;
+}
+
+.description-text {
+  color: rgb(82, 82, 82);
+  font-size: 0.9em;
+}
+
+.show-tasks {
+  color: gray;
+}
+
+.show-tasks:hover {
+  color: blue;
+  text-decoration: underline;
+}

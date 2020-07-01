@@ -9,5 +9,9 @@ module.exports = (app) => {
   router.get("/", task.findAll);
   router.get("/:id", task.findById);
 
+  router.post("/list", task.list);
+  router.post("/listCompleted", task.listCompleted);
+  router.post("/markascompleted", task.markascompleted);
+
   app.use("/api/tasks", router);
 };

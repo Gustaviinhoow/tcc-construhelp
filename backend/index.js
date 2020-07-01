@@ -18,8 +18,8 @@ app.use(allowCrossDomain);
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-database.sequelize.sync({ force: true }).then(() => {
-  console.log("Drop and re-sync db.");
+database.sequelize.sync().then(() => {
+  console.log("Re-sync db.");
 });
 
 // Routes

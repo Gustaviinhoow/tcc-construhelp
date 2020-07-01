@@ -60,8 +60,6 @@ export default function Settings(props) {
       ...password,
       [event.target.id]: event.target.value,
     });
-
-    console.log(password);
   }
 
   function handleSubmit() {
