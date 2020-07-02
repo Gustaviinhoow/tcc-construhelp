@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Container, Form, Button, Card, ListGroup } from "react-bootstrap";
+import { Container, Form, Button, Card } from "react-bootstrap";
 
 import Header from "./Header";
 import api from "../../services/api";
@@ -129,7 +129,7 @@ export default class Workspace extends Component {
       <div className="row">
         {this.state.taskDataCompleted === undefined ||
         this.state.taskDataCompleted.length === 0 ? (
-          <p>Tudo limpo.</p>
+          <p style={{ marginLeft: 15 }}>Tudo limpo.</p>
         ) : (
           this.state.taskDataCompleted.map((item) => {
             const itemData = item.deadline;
@@ -346,7 +346,7 @@ export default class Workspace extends Component {
             <div className="row">
               {this.state.taskData === undefined ||
               this.state.taskData.length === 0 ? (
-                <p>Tudo limpo.</p>
+                <p style={{ marginLeft: 15 }}>Tudo limpo.</p>
               ) : (
                 this.state.taskData.map((item) => {
                   const itemData = item.deadline;
@@ -362,7 +362,7 @@ export default class Workspace extends Component {
                   }
 
                   return (
-                    <div className="col-md-4 spacing-top">
+                    <div key={item.id} className="col-md-4 spacing-top">
                       <Card
                         key={item.id}
                         style={{ width: "18rem" }}

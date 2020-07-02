@@ -149,6 +149,7 @@ exports.list = (req, res) => {
       });
     });
 };
+
 exports.listCompleted = (req, res) => {
   const { workspaceId } = req.body;
 
@@ -200,6 +201,27 @@ exports.markascompleted = (req, res) => {
     .catch((error) => {
       res.status(500).send({
         message: "Error updating task with id=" + id,
+      });
+    });
+};
+
+exports.tasksPriority = (req, res) => {
+  const priority = req.body.priority;
+
+  if (priority === undefined || priority === null) {
+    res.status(400).send({
+      message: `Content can not be empty! content: ${priority}`,
+    });
+    return;
+  }
+
+  return Task.findAll({ where: { priority: priority, completed: false } })
+    .then((data) => {
+      res.send(data);
+    })
+    .catch((error) => {
+      res.status(500).send({
+        message: `Error while searching data`,
       });
     });
 };

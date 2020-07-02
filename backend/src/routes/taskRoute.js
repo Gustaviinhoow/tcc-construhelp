@@ -12,6 +12,7 @@ module.exports = (app) => {
   router.post("/list", task.list);
   router.post("/listCompleted", task.listCompleted);
   router.post("/markascompleted", task.markascompleted);
+  router.post("/tasksPriority", task.tasksPriority);
 
   app.use("/api/tasks", router);
 };
