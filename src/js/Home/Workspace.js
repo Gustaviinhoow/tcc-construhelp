@@ -10,6 +10,7 @@ import {
 import "react-notifications/lib/notifications.css";
 import { confirmAlert } from "react-confirm-alert";
 
+import logo from "../../img/logo.png";
 import "../../css/Workspace.css";
 
 export default class Workspace extends Component {

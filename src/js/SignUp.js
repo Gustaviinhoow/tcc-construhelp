@@ -11,6 +11,9 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import api from "../services/api";
+import logo from "../img/logo.png"
+import "../css/Header.css";
+
 
 import {
   NotificationContainer,
@@ -100,9 +103,9 @@ export default function SignUp(props) {
     <Container component="main" maxWidth="xs">
       <CssBaseline />
       <div className={classes.paper}>
-        <Avatar className={classes.avatar}>
-          <LockOutlinedIcon />
-        </Avatar>
+          <img src={logo} style={{ width: "450px",
+                                  height: "300px",}} />
+
         <Typography component="h1" variant="h5">
           Cadastro
         </Typography>

@@ -12,6 +12,8 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import "./SignUp";
 import api from "../services/api";
+import logo from "../img/logo.png"
+import "../css/Header.css";
 
 import {
   NotificationContainer,
@@ -127,9 +129,8 @@ export default function SignInSide() {
       <Grid item xs={false} sm={4} md={7} className={classes.image} />
       <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
         <div className={classes.paper}>
-          <Avatar className={classes.avatar}>
-            <LockOutlinedIcon />
-          </Avatar>
+            <img src={logo} style={{ width: "450px",
+                                  height: "300px",}} />
           <Typography component="h1" variant="h5">
             Login
           </Typography>
