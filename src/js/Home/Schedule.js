@@ -18,7 +18,7 @@ export default function Schedule(props) {
   }, []);
 
   function getTasks(priority) {
-    const Task = { priority: priority };
+    const Task = { priority: priority, id: props.id };
 
     api
       .post(`/tasks/tasksPriority/`, Task)

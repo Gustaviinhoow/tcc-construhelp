@@ -10,7 +10,6 @@ import {
 import "react-notifications/lib/notifications.css";
 import { confirmAlert } from "react-confirm-alert";
 
-import logo from "../../img/logo.png";
 import "../../css/Workspace.css";
 
 export default class Workspace extends Component {
@@ -24,6 +23,7 @@ export default class Workspace extends Component {
         priority: "Normal",
         deadline: null,
         workspaceId: this.props.workspaceId,
+        userId: this.props.userId,
       },
       taskData: [],
       listTasks: false,

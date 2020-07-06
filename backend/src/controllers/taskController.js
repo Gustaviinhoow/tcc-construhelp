@@ -1,6 +1,7 @@
 const db = require("../models/database");
 
 const Task = db.task;
+const Workspace = db.workspace;
 
 exports.create = (req, res) => {
   const {
@@ -10,6 +11,7 @@ exports.create = (req, res) => {
     completed,
     deadline,
     workspaceId,
+    userId,
   } = req.body;
 
   return Task.create({
@@ -19,6 +21,7 @@ exports.create = (req, res) => {
     completed: completed ? completed : false,
     deadline: deadline,
     WorkspaceId: workspaceId,
+    UserId: userId,
   })
     .then((data) => {
       res.send(data);
@@ -206,7 +209,7 @@ exports.markascompleted = (req, res) => {
 };
 
 exports.tasksPriority = (req, res) => {
-  const priority = req.body.priority;
+  const { priority, id } = req.body;
 
   if (priority === undefined || priority === null) {
     res.status(400).send({
@@ -215,13 +218,15 @@ exports.tasksPriority = (req, res) => {
     return;
   }
 
-  return Task.findAll({ where: { priority: priority, completed: false } })
+  Task.findAll({
+    where: { priority: priority, completed: false, userId: id },
+  })
     .then((data) => {
       res.send(data);
     })
     .catch((error) => {
       res.status(500).send({
-        message: `Error while searching data`,
+        message: `Error while searching data: ${error}`,
       });
     });
 };
